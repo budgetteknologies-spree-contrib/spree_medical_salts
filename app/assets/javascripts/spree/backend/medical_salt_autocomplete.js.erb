@@ -1,0 +1,52 @@
+'use strict';
+
+Spree.routes.medical_salts_api = Spree.pathFor('api/medical_salts');
+
+var set_medical_salt_select = function(selector){
+  function formatMedicalSalt(medical_salt) {
+    return Select2.util.escapeMarkup(medical_salt.pretty_name);
+  }
+
+  if ($(selector).length > 0) {
+    $(selector).select2({
+      placeholder: Spree.translations.medical_salt_placeholder,
+      multiple: true,
+      initSelection: function (element, callback) {
+        var url = Spree.url(Spree.routes.medical_salts_api, {
+          ids: element.val(),
+          token: Spree.api_key
+        });
+        return $.getJSON(url, null, function (data) {
+          return callback(data['medical_salts']);
+        });
+      },
+      ajax: {
+        url: Spree.routes.medical_salts_api,
+        datatype: 'json',
+        data: function (term, page) {
+          return {
+            per_page: 50,
+            page: page,
+            q: {
+              name_cont: term
+            },
+            token: Spree.api_key
+          };
+        },
+        results: function (data, page) {
+          var more = page < data.pages;
+          return {
+            results: data['medical_salts'],
+            more: more
+          };
+        }
+      },
+      formatResult: formatMedicalSalt,
+      formatSelection: formatMedicalSalt
+    });
+  }
+}
+
+$(document).ready(function () {
+  set_medical_salt_select('#product_medical_salt_ids');
+});

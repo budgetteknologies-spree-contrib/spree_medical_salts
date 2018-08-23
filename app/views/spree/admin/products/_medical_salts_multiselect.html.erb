@@ -1,0 +1,18 @@
+<div data-hook="admin_product_form_medical_salts">
+  <%= f.field_container :medical_salts, class: ['form-group'] do %>
+    <%= f.label :medical_salt_ids, Spree.t(:medical_salts) %>
+
+    <% if can? :modify, Spree::Classification %>
+      <%= f.hidden_field :medical_salt_ids, value: @product.medical_salt_ids.join(',') %>
+    <% elsif @product.taxons.any? %>
+      <ul class="text_list">
+        <% @product.taxons.each do |taxon| %>
+          <li><%= taxon.name %></li>
+        <% end %>
+      </ul>
+    <% else %>
+      <div class="alert alert-info"><%= Spree.t(:no_resource_found, resource: :taxons) %></div>
+    <% end %>
+
+  <% end %>
+</div>

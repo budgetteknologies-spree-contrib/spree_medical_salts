@@ -1,0 +1,23 @@
+<%= render partial: 'spree/admin/shared/product_tabs', locals: { current: 'Medical Salts' } %>
+
+<%= form_tag update_medical_salts_admin_product_path(@product), method: :put, html: { multipart: true } do |f| %>
+  <fieldset>
+
+    <div data-hook="admin_product_form_medical_salts">
+      <%= f.field_container :medical_salts, class: ['form-group'] do %>
+        <%= f.label :medical_salt_ids, Spree.t(:medical_salts) %>
+
+        <% if (can? :modify, Spree::Classification) && @medical_salts.any? %>
+          <%= f.collection_select(:medical_salt_ids, @medical_salts, :id, :pretty_name, { include_blank: Spree.t('match_choices.none') }, { class: 'select2', multiple: 'multiple' }) %>
+        <% else %>
+          <div class="alert alert-info"><%= Spree.t(:no_resource_found, resource: :medical_salts) %></div>
+        <% end %>
+      <% end %>
+    </div>
+    <div class="form-actions" data-hook="buttons">
+      <%= button Spree.t('actions.update'), 'refresh', 'submit', {class: 'btn-success', data: { disable_with: "#{ Spree.t(:saving) }..." }} %>
+      <span class="or"><%= Spree.t(:or) %></span>
+      <%= button_link_to Spree.t('actions.cancel'), collection_url, icon: 'delete' %>
+    </div>
+  </fieldset>
+<% end %>

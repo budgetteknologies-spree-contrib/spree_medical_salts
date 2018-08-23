@@ -1,0 +1,89 @@
+<div data-hook="admin_medical_salts_form_fields" class="row">
+  <div class="col-md-6">
+
+
+
+    <%= f.field_container :name, class: ['form-group'] do %>
+      <%= f.label :name %>
+
+      <%= f.text_field :name, class: 'form-control' %>
+
+      <%= error_message_on :medical_salt, :name %>
+
+    <% end %>
+
+
+
+
+    <%= f.field_container :description, class: ['form-group'] do %>
+      <%= f.label :description %>
+
+      <%= f.text_field :description, class: 'form-control' %>
+
+      <%= error_message_on :medical_salt, :description %>
+
+    <% end %>
+
+
+
+
+    <%= f.field_container :how_it_works, class: ['form-group'] do %>
+      <%= f.label :how_it_works %>
+
+      <%= f.text_field :how_it_works, class: 'form-control' %>
+
+      <%= error_message_on :medical_salt, :how_it_works %>
+
+    <% end %>
+
+
+
+
+    <%= f.field_container :uses, class: ['form-group'] do %>
+      <%= f.label :uses %>
+
+      <%= f.text_field :uses, class: 'form-control' %>
+
+      <%= error_message_on :medical_salt, :uses %>
+
+    <% end %>
+
+
+
+
+    <%= f.field_container :side_effects, class: ['form-group'] do %>
+      <%= f.label :side_effects %>
+
+      <%= f.text_field :side_effects, class: 'form-control' %>
+
+      <%= error_message_on :medical_salt, :side_effects %>
+
+    <% end %>
+
+
+
+
+    <%= f.field_container :potency, class: ['form-group'] do %>
+      <%= f.label :potency %>
+
+      <%= f.text_field :potency, class: 'form-control' %>
+
+      <%= error_message_on :medical_salt, :potency %>
+
+    <% end %>
+
+
+
+
+    <%= f.field_container :potency_type, class: ['form-group'] do %>
+      <%= f.label :potency_type %>
+
+      <%= f.text_field :potency_type, class: 'form-control' %>
+
+      <%= error_message_on :medical_salt, :potency_type %>
+
+    <% end %>
+
+
+  </div>
+</div>

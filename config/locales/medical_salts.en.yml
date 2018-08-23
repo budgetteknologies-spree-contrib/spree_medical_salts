@@ -1,0 +1,28 @@
+en:
+  spree:
+    potency: Potency
+    potency_type: Potency Type
+    admin:
+      tab:
+        medical_salts: "MedicalSalts"
+        new_medical_salts: "New MedicalSalts"
+    listing_medical_salts: "Listing MedicalSalts"
+    editing_medical_salts: "Editing MedicalSalts"
+    medical_salt_placeholder: "Add a Salt"
+  activerecord:
+    attributes:
+      spree/medical_salts:
+
+        name: Name
+
+        description: Description
+
+        how_it_works: How It Works
+
+        uses: Uses
+
+        side_effects: Side Effects
+
+        potency: Potency
+
+        potency_type: Potency Type

@@ -1,0 +1,65 @@
+<% content_for :page_title do %>
+  <%= Spree.t(:listing_medical_salts) %>
+<% end %>
+
+<% content_for :page_actions do %>
+  <%= button_link_to Spree.t(:new_medical_salt), new_object_url, class: 'btn-success', icon: 'add', id: 'admin_new_medical_salt_link' %>
+<% end if can?(:create, Spree::MedicalSalt) %>
+
+<% content_for :table_filter do %>
+  <div data-hook="admin_medical_salts_index_search">
+    <%= search_form_for [:admin, @search], url: spree.admin_medical_salts_url do |f| %>
+      <div class="form-group">
+        <%= f.label Spree.t(:name) %>
+        <%= f.text_field :name_cont, class: "form-control js-quick-search-target" %>
+      </div>
+      <div class="row">
+        <div class="col-xs-12 col-md-6">
+          <div class="form-group">
+            <%= f.label Spree.t(:potency) %>
+            <%= f.text_field :potency_cont, class: 'form-control' %>
+          </div>
+        </div>
+        <div class="col-xs-12 col-md-6">
+          <div class="form-group">
+            <%= f.label Spree.t(:potency_type) %>
+            <%= f.text_field :potency_type_cont, class: 'form-control' %>
+          </div>
+        </div>
+      </div>
+      <div data-hook="admin_medical_salts_index_search_buttons" class="form-actions">
+        <%= button Spree.t(:search), 'search' %>
+      </div>
+    <% end %>
+  </div>
+<% end %>
+
+<table class="table" id="listing_medical_salts" data-hook>
+
+  <thead>
+    <tr data-hook="admin_medical_salts_index_headers">
+
+      <th><%= t(:name, scope: 'activerecord.attributes.spree/medical_salts') %></th>
+      <th><%= t(:potency, scope: 'activerecord.attributes.spree/medical_salts') %></th>
+      <th><%= t(:potency_type, scope: 'activerecord.attributes.spree/medical_salts') %></th>
+      <th data-hook="admin_medical_salts_index_header_actions" class="actions"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @medical_salts.each do |medical_salt| %>
+      <tr id="<%= spree_dom_id medical_salt %>" data-hook="admin_medical_salt_index_rows" class="<%= cycle('odd', 'even')%>">
+
+        <td><%= link_to medical_salt.name, edit_object_url(medical_salt) %></td>
+        <td><%= medical_salt.potency %></td>
+        <td><%= medical_salt.potency_type %></td>
+        <td data-hook="admin_medical_salt_index_row_actions" class="actions text-right">
+          <%= link_to_edit medical_salt, no_text: true %>
+          <%= link_to_delete medical_salt, no_text: true %>
+
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= paginate @medical_salts %>
